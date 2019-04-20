@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="subintro">
+
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <h3>Styled <strong>Lists</strong></h3>
+        </div>
+        <div class="span8">
+          <ul class="breadcrumb notop">
+            <li><a href="#">Home</a><span class="divider">/</span></li>
+            <li class="active">Lists</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+<section id="maincontent">
+  <div class="container">
+    <div class="row">
+
+      <div class="span4">
+        <aside>
+          <div class="widget">
+            <h4>Search</h4>
+            <form class="form-search">
+              <input placeholder="Type something" type="text" class="input-medium search-query">
+              <button type="submit" class="btn btn-flat btn-color">Search</button>
+            </form>
+          </div>
+          <div class="widget">
+            <h4>Sort By Status</h4>
+            <ul class="cat">
+              <li><a href="#">Offer (8)</a></li>
+              <li><a href="#">On Site (11)</a></li>
+              <li><a href="#">Coding Challenge (20)</a></li>
+              <li><a href="#">Technical Interview (43)</a></li>
+              <li><a href="#">Phone Screen (67)</a></li>
+              <li><a href="#">Application Submitted (118)</a></li>
+            </ul>
+          </div>
+          <div class="widget">
+            <h4>Recent Active Applications</h4>
+            <ul class="recent-posts">
+              <li><a href="#">Lorem ipsum dolor sit amet munere commodo ut nam</a>
+                <div class="clear">
+                </div>
+                <span class="date"><i class="icon-calendar"></i> 6 March, 2013</span>
+                <span class="comment"><i class="icon-comment"></i> 4 Events</span>
+              </li>
+              <li><a href="#">Sea nostrum omittantur ne mea malis nominavi insolens</a>
+                <div class="clear">
+                </div>
+                <span class="date"><i class="icon-calendar"></i> 6 March, 2013</span>
+                <span class="comment"><i class="icon-comment"></i> 2 Events</span>
+              </li>
+              <li><a href="#">Eius graece recusabo no pri odio tale quo id, mea at saepe</a>
+                <div class="clear">
+                </div>
+                <span class="date"><i class="icon-calendar"></i> 4 March, 2013</span>
+                <span class="comment"><i class="icon-comment"></i> 12 Events</span>
+              </li>
+              <li><a href="#">Malorum deserunt at nec usu ad graeco elaboraret at rebum</a>
+                <div class="clear">
+                </div>
+                <span class="date"><i class="icon-calendar"></i> 3 March, 2013</span>
+                <span class="comment"><i class="icon-comment"></i> 3 Events</span>
+              </li>
+            </ul>
+          </div>
+          <div class="widget">
+            <h4>Tags</h4>
+            <ul class="tags">
+              <li><a href="#">Front End</a></li>
+              <li><a href="#">Back End</a></li>
+              <li><a href="#">Full Stack</a></li>
+              <li><a href="#">Remote</a></li>
+              <li><a href="#">Preferred</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+      <div class="span8">
+        <!-- start application -->
+        <article class="blog-post">
+          <div class="post-heading">
+            <h3><a href="#">Position @ Company</a></h3>
+          </div>
+          <div class="row">
+            <div class="span3">
+              <div class="post-icon">
+                <i class="icon-bg-dark icon-circled icon-file icon-3x active"></i>
+              </div>
+              <ul class="post-meta">
+                <li class="first"><i class="icon-calendar"></i><span>March 03, 2013</span></li>
+                <li><i class="icon-list-alt"></i><span><a href="#">3 events</a></span></li>
+                <li class="last"><i class="icon-tags"></i><span><a href="#">Full Stack</a>, <a href="#">Remote</a>, <a href="#">Preferred</a></span></li>
+              </ul>
+              <div class="clear"></div>
+            </div>
+            <div class="span5">
+              <p>
+                Text from most recent event update.
+              </p>
+              <a href="#" class="btn btn-color btn-rounded">View detail</a>
+            </div>
+          </div>
+        </article>
+        <!-- end application -->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

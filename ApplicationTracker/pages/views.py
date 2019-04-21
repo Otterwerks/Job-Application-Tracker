@@ -5,3 +5,6 @@ def index(request):
 
 def applications(request):
     return render(request, 'pages/application-list.html')
+
+def detail(request):
+    return render(request, 'pages/application-detail.html')

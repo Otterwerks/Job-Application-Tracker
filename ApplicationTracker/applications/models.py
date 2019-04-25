@@ -20,6 +20,7 @@ class Application(models.Model):
     resume = models.FileField(upload_to='user/', blank=True)
     cover_letter = models.FileField(upload_to='user/', blank=True)
     is_active = models.BooleanField(default=True)
+    is_stale = models.BooleanField(default=False)
 
     def __str__(self):
         return (self.position + ' @ ' + self.company)

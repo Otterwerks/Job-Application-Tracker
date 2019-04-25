@@ -7,6 +7,8 @@ db.sqlite3
 ApplicationTracker/media
 ApplicationTracker/static
 
+.DS_Store
+
 env
 .vscode
 

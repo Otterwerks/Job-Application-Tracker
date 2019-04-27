@@ -2,6 +2,45 @@
 
 {% block content %}
 
-<h1>Login</h1>
+<section id="subintro">
+  <div class="container">
+    <div class="row">
+      <div class="span4"></div>
+      <div class="span4">
+        <h3>Sign in to start using <strong>Otter</strong></h3>
+      </div>
+      <div class="span4"></div>
+    </div>
+  </div>
+</section>
+
+<section id="maincontent">
+  <div class="container">
+    <div class="row">
+        <div class="span4"></div>
+          <div id="errormessage"></div>
+          <form action="" method="post" role="form" class="contactForm span4">
+            <div class="row">
+              <div class="span4 form-group">
+                <input type="text" name="username" class="form-control" id="user_name" placeholder="Username" data-rule="minlen:6" data-msg="Please enter at least 6 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="passowrd" class="form-control" name="password" id="password" placeholder="Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <div class="text-center">
+                  <button class="btn btn-color btn-rounded" type="submit" name="login">Sign In</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="span4"></div>
+    </div>
+  </div>
+</section>
+
+
 
 {% endblock %}

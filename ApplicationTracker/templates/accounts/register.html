@@ -2,6 +2,68 @@
 
 {% block content %}
 
-<h1>Register</h1>
+<section id="subintro">
+  <div class="container">
+    <div class="row">
+      <div class="span4"></div>
+      <div class="span4">
+        <h3>Sign up for <strong>Otter</strong></h3>
+      </div>
+      <div class="span4"></div>
+    </div>
+  </div>
+</section>
+
+<section id="maincontent">
+  <div class="container">
+    <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+                <h5>Register</h5>
+                <p>Create an account to organize and track your job hunt.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="span1"></div>
+          <div id="errormessage"></div>
+          <form action="" method="post" role="form" class="contactForm span8">
+            <div class="row">
+              <div class="span4 form-group">
+                <input type="text" name="first" class="form-control" id="first_name" placeholder="First Name" data-rule="minlen:1" data-msg="Please enter at least 1 char(s)" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" name="last" id="last_name" placeholder="Last Name" data-rule="minlen:1" data-msg="Please enter at least 1 char(s)" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" name="username" class="form-control" id="user_name" placeholder="Username" data-rule="minlen:6" data-msg="Please enter at least 6 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="password" name="pasword" class="form-control" id="password" placeholder="Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="password" class="form-control" name="confirmPassword" id="confirm_password" placeholder="Confirm Password" data-rule="minlen:8" data-msg="Please enter at least 8 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="span8 form-group">
+                <div class="text-center">
+                  <button class="btn btn-color btn-large btn-rounded" type="submit" name="register">Register</button>
+                </div>
+              </div>
+            </div>
+          </form>
+    </div>
+  </div>
+</section>
+
+
 
 {% endblock %}

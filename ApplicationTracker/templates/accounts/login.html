@@ -15,11 +15,13 @@
 </section>
 
 <section id="maincontent">
+  {% include '_alerts.html' %}
   <div class="container">
     <div class="row">
         <div class="span4"></div>
           <div id="errormessage"></div>
-          <form action="" method="post" role="form" class="contactForm span4">
+          <form action="{% url 'login' %}" method="POST" role="form" class="contactForm span4">
+            {% csrf_token %}
             <div class="row">
               <div class="span4 form-group">
                 <input type="text" name="username" class="form-control" id="user_name" placeholder="Username" data-rule="minlen:6" data-msg="Please enter at least 6 chars" />

@@ -133,4 +133,10 @@ jQuery(document).ready(function ($) {
   });
 
 
+  //Message Fade
+  setTimeout(function() {
+    $('#message').fadeOut('slow');
+  }, 3000);
+
+
 });

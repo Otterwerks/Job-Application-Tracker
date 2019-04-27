@@ -30,6 +30,31 @@
                         >
                             <a href="{% url 'index' %}">Home</a>
                         </li>
+                        {% if user.is_authenticated %}
+                        <li 
+                        {% if '/dashboard' in request.path %}
+                            class="dropdown active"
+                        {% else %}
+                            class="dropdown"
+                        {% endif %}
+                        >
+                            <a href="{% url 'dashboard' %}">{{ user.username }}'s Dashboard</a>
+                            <ul class="dropdown-menu">
+                            <li><a href="#">Scaffolding</a></li>
+                            <li><a href="#">Base CSS</a></li>
+                            <li><a href="#">Components</a></li>
+                            <li><a href="#">Icons</a></li>
+                            <li><a href="#">Styled lists</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:{document.getElementById('logout').submit()}">Log Out</a>
+                            <form id="logout" action="{% url 'logout' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden">
+                            </form>
+                        </li>
+                        {% else %}
                         <li class="dropdown">
                             <a href="#">Features</a>
                             <ul class="dropdown-menu">
@@ -58,6 +83,7 @@
                         >
                             <a href="{% url 'login' %}">Log In</a>
                         </li>
+                        {% endif %}
                         </ul>
                     </nav>
                     </div>

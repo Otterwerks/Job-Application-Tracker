@@ -21,7 +21,13 @@
                     <div class="navbar-inner">
                     <nav>
                         <ul class="nav topnav">
-                        <li class="dropdown active">
+                        <li 
+                        {% if '/' == request.path %}
+                            class="dropdown active"
+                        {% else %}
+                            class="dropdown"
+                        {% endif %}
+                        >
                             <a href="{% url 'index' %}">Home</a>
                         </li>
                         <li class="dropdown">
@@ -34,11 +40,23 @@
                             <li><a href="#">Styled lists</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="#">Register</a>
+                        <li
+                        {% if 'register' in request.path %}
+                            class="dropdown active"
+                        {% else %}
+                            class="dropdown"
+                        {% endif %}
+                        >
+                            <a href="{% url 'register' %}">Register</a>
                         </li>
-                        <li>
-                            <a href="#">Log In</a>
+                        <li
+                        {% if 'login' in request.path %}
+                            class="dropdown active"
+                        {% else %}
+                            class="dropdown"
+                        {% endif %}
+                        >
+                            <a href="{% url 'login' %}">Log In</a>
                         </li>
                         </ul>
                     </nav>

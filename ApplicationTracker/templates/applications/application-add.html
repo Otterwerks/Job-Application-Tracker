@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %} | Add Application{% endblock %}
+
+{% block content %}
+
+<section id="subintro">
+  <div class="container">
+    <div class="row">
+      <div class="span4"></div>
+      <div class="span4">
+        <h3>Add a new <strong>application</strong></h3>
+      </div>
+      <div class="span4"></div>
+    </div>
+  </div>
+</section>
+
+<section id="maincontent">
+  <div class="container">
+    <div class="row">
+        <div class="span3">
+          <aside>
+            <div class="widget">
+                <h5 class="center">New Application</h5>
+                <p>Fill out the form with as many details as you can about the job you applied to. This will add the application to your application list and you will be able to track the recruitment process for this job by updating it with events.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="span1"></div>
+          <div id="errormessage"></div>
+          <form action="" method="POST" role="form" class="contactForm span8">
+            {% csrf_token %}
+            <div class="row">
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="position" name="position" placeholder="Position applied for" data-rule="minlen:6" data-msg="Please enter at least 6 char(s)" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="company" name="company" placeholder="Company" data-rule="minlen:6" data-msg="Please enter at least 6 char(s)" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="location" name="location" placeholder="Location" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="department" name="department" placeholder="Department" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="company_url" name="company_url" placeholder="Company URL link" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="posting_url" name="posting_url" placeholder="URL link to job posting" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="portal_url" name="portal_url" placeholder="URL link to company portal" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="portal_login" name="portal_login" placeholder="Username for company portal" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="text" class="form-control" id="portal_pass" name="portal_pass" placeholder="Password for company portal" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="date" class="form-control" id="posted_on" name="posted_on" placeholder="Date job posted" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="date" class="form-control" id="closes_on" name="closes_on" placeholder="Date job closes" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <input type="date" class="form-control" id="applied_on" name="applied_on" placeholder="Date applied" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <textarea class="form-control" name="body" rows="5" placeholder="Copy job posting text into this field"></textarea>
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <p>Upload Resume:</p>
+                <input type="file" class="form-control" id="resume" name="resume" placeholder="resume" />
+                <div class="validation"></div>
+              </div>
+              <div class="span4 form-group">
+                <p>Upload Cover Letter:</p>
+                <input type="file" class="form-control" id="cover_letter" name="cover_letter" placeholder="cover_letter" />
+                <div class="validation"></div>
+              </div>
+              <div class="span1 form-group">
+                <div class="text-center">
+                  <button class="btn btn-color btn-rounded span1" type="submit" name="save">Save</button>
+                </div>
+              </div>
+              <div class="span1 form-group">
+                <div class="text-center">
+                  <a href="{% url 'dashboard' %}"><button class="btn btn-rounded span1" type="button" name="cancel">Cancel</button></a>
+                </div>
+              </div>
+            </div>
+          </form>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

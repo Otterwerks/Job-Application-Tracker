@@ -1,8 +1,8 @@
 from django.db import models
-#from users.models import User
+from django.contrib.auth.models import User
 
 class Application(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     position = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     location = models.CharField(max_length=200, blank=True)

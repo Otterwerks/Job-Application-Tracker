@@ -19,11 +19,12 @@ def add(request):
         application_data = {'user': request.user}
         for field in application_fields:
             try:
-                application_data[field] = request.POST[field]
+                if request.POST[field] != "":
+                    application_data[field] = request.POST[field]
             except:
                 pass
 
-        new_application = Application.objects.create(application_data)
+        new_application = Application.objects.create(**application_data)
         messages.success(request, 'New application added')
         return redirect('dashboard')
 

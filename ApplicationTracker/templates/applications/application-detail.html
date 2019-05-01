@@ -51,38 +51,37 @@
                             <div class="widget">
                                 <h4>Application Summary</h4>
                                 <ul class="project-detail">
-                                <li><label>Company Name :</label> Uber </li>
-                                <li><label>Position :</label> Full Stack Engineer</li>
-                                <li><label>Applied On :</label> 12 June 2013</li>
-                                <li><label>Last Updated On :</label> 12 June 2013</li>
+                                <li><label>Company Name :</label> {{ application.company }} </li>
+                                <li><label>Position :</label> {{ application.position }} </li>
+                                {% if application.applied_on %}<li><label>Applied On :</label> 12 June 2013</li>{% endif %}
+                                {% comment %} {% if  %}<li><label>Last Updated On :</label> 12 June 2013</li>{% endif %} {% endcomment %}
                                 <li><label>Stage :</label> Technical Interview</li>
-                                <li><label>Original Ad :</label><a href="#">www.websitelink.com</a></li>
+                                {% if application.posting_url %}<li><label>Original Ad :</label><a href="{{ application.posting_url }}">Click here</a></li>{% endif %}
                                 </ul>
                             </div>
                         </aside>
                     </div>
                     <div class="tab-pane" id="two">
-                        <p>
-                            Tale dolor mea ex, te enim assum suscipit cum, vix aliquid omittantur in. Duo eu cibo dolorum menandri, nam sumo dicit admodum ei. Ne mazim commune honestatis cum, mentitum phaedrum sit et.
-                        </p>
-                        <p>
-                            Tale dolor mea ex, te enim assum suscipit cum, vix aliquid omittantur in. Duo eu cibo dolorum menandri, nam sumo dicit admodum ei. Ne mazim commune honestatis cum, mentitum phaedrum sit et.
-                        </p>
+                      {% if application.body %}
+                        <p>{{ application.body }}</p>
+                      {% else %}
+                        <p>Copy the posting text into the 'Body' field when adding an application to save it and view it here.</p>
+                      {% endif %}
+                    </div>
+                    <div class="tab-pane" id="three">
+                      <aside>
+                        <div class="widget">
+                          <h4>Information</h4>
+                          <ul class="project-detail">
+                            <li><label>Resume :</label> filename </li>
+                            <li><label>Cover Letter :</label> filename </li>
+                            <li><label>Email Contact :</label> person@company.com</li>
+                            <li><label>Portal URL :</label> <a href="#">www.website.com</a></li>
+                            <li><label>Portal Username :</label> user</li>
+                            <li><label>Portal Password :</label> pass</li>
+                          </ul>
                         </div>
-                        <div class="tab-pane" id="three">
-                        <aside>
-                            <div class="widget">
-                                <h4>Information</h4>
-                                <ul class="project-detail">
-                                <li><label>Resume :</label> filename </li>
-                                <li><label>Cover Letter :</label> filename </li>
-                                <li><label>Email Contact :</label> person@company.com</li>
-                                <li><label>Portal URL :</label> <a href="#">www.website.com</a></li>
-                                <li><label>Portal Username :</label> user</li>
-                                <li><label>Portal Password :</label> pass</li>
-                                </ul>
-                            </div>
-                        </aside>
+                      </aside>
                     </div>
                 </div>
               </div>

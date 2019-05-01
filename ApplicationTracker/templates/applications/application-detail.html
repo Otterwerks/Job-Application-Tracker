@@ -13,8 +13,8 @@
         <div class="span8">
           <ul class="breadcrumb notop">
             <li><a href="{% url 'index' %}">Home</a><span class="divider">/</span></li>
-            <li><a href="{% url 'applications' %}">Appliation List</a><span class="divider">/</span></li>
-            <li class="active">position @ company</li>
+            <li><a href="{% url 'applications' %}">Application List</a><span class="divider">/</span></li>
+            <li class="active">{{ application.position }} @ {{ application.company }}</li>
           </ul>
         </div>
       </div>
@@ -29,7 +29,7 @@
         <div class="span12">
           <article>
             <div class="heading">
-              <h3><strong>Position @ Company</strong></h3>
+              <h3><strong>{{ application.position }} @ {{ application.company }}</strong></h3>
               <div class="progress progress-striped active">
                 <div class="bar" style="width: 80%;"></div>
             </div>

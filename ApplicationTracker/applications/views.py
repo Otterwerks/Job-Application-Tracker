@@ -1,16 +1,28 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from applications.models import Application
+from .models import Application
 from django.contrib import messages
 
 
 @login_required
 def index(request):
-    return render(request, 'applications/application-list.html')
+    applications = Application.objects.filter(user=request.user)
+
+    context = {
+        'applications': applications
+    }
+
+    return render(request, 'applications/application-list.html', context)
 
 @login_required
-def detail(request):
-    return render(request, 'applications/application-detail.html')
+def detail(request, application_id):
+    application = get_object_or_404(Application, pk=application_id, user=request.user)
+
+    context = {
+        'application': application
+    }
+
+    return render(request, 'applications/application-detail.html', context)
 
 @login_required
 def add(request):

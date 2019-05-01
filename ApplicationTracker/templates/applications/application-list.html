@@ -86,37 +86,51 @@
       </div>
       <div class="span8">
         <!-- start application -->
-        <article class="blog-post">
-          <div class="post-heading">
-            <h3><a href="#">Position @ Company</a></h3>
-          </div>
-          <div class="row">
-            <div class="span3">
-              <div class="post-icon">
-                <i class="icon-bg-dark icon-circled icon-dollar icon-3x active"></i>
-              </div>
-              <ul class="post-meta">
-                <li class="first"><i class="icon-calendar"></i><span>March 03, 2013</span></li>
-                <li><i class="icon-list-alt"></i><span><a href="#">3 events</a></span></li>
-                <li class="last"><i class="icon-tags"></i><span><a href="#">Full Stack</a>, <a href="#">Remote</a>, <a href="#">Preferred</a></span></li>
-              </ul>
-              <div class="clear"></div>
+        {% if applications %}
+          {% for application in applications %}
+
+           <article class="blog-post">
+            <div class="post-heading">
+              <h3><a href="#">{{ application.position }} @ {{ application.company }}</a></h3>
             </div>
-            <div class="span5">
-              <div class="progress progress-striped">
-                <div class="bar" style="width: 80%;"></div>
+            <div class="row">
+              <div class="span3">
+                <div class="post-icon">
+                  <i class="icon-bg-dark icon-circled icon-dollar icon-3x active"></i>
+                </div>
+                <ul class="post-meta">
+                  <li class="first"><i class="icon-calendar"></i><span>March 03, 2013</span></li>
+                  <li><i class="icon-list-alt"></i><span><a href="#">3 events</a></span></li>
+                  <li class="last"><i class="icon-tags"></i><span><a href="#">Full Stack</a>, <a href="#">Remote</a>, <a href="#">Preferred</a></span></li>
+                </ul>
+                <div class="clear"></div>
               </div>
-              <p>
-                Text from most recent event update.
-              </p>
-              <a href="#" class="btn btn-color btn-rounded">View detail</a>
+              <div class="span5">
+                <div class="progress progress-striped">
+                  <div class="bar" style="width: 80%;"></div>
+                </div>
+                <p>
+                  Text from most recent event update.
+                </p>
+                <a href="{% url 'detail' application.id %}" class="btn btn-color btn-rounded">View detail</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+
+        {% endfor %}
+        {% else %}
+
+        <div>
+          <h4>You haven't added any applications yet.</h4>
+          <p>Click <a href="{% url 'add' %}">here</a> to add an application.</p>
+        </div>
+
+        {% endif %}
         <!-- end application -->
       </div>
     </div>
   </div>
 </section>
+
 
 {% endblock %}

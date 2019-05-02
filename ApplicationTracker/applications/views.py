@@ -43,3 +43,15 @@ def add(request):
 
     else:
         return render(request, 'applications/application-add.html')
+
+@login_required
+def delete(request, application_id):
+    application_to_delete = get_object_or_404(Application, pk=application_id, user=request.user)
+
+    if request.method == 'POST':
+        application_to_delete.delete()
+        return redirect('applications')
+
+    else:
+        return redirect('applications')
+        

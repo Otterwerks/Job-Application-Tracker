@@ -89,6 +89,8 @@
         {% if applications %}
           {% for application in applications %}
 
+          {% include 'applications/_application-delete.html' %}
+
            <article class="blog-post">
             <div class="post-heading">
               <h3><a href="#">{{ application.position }} @ {{ application.company }}</a></h3>
@@ -113,6 +115,7 @@
                   Text from most recent event update.
                 </p>
                 <a href="{% url 'detail' application.id %}" class="btn btn-color btn-rounded">View detail</a>
+                <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#deleteModal">Delete</a>
               </div>
             </div>
           </article>

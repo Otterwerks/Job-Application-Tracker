@@ -29,7 +29,7 @@
         </div>
         <div class="span1"></div>
           <div id="errormessage"></div>
-          <form action="{% url 'add' %}" method="POST" role="form" class="contactForm span8">
+          <form action="{% url 'application-add' %}" method="POST" role="form" class="contactForm span8">
             {% csrf_token %}
             <div class="row">
               <div class="span4 form-group">
@@ -101,7 +101,7 @@
               </div>
               <div class="span1 form-group">
                 <div class="text-center">
-                  <a href="{% url 'dashboard' %}"><button class="btn btn-rounded span1" type="button" name="cancel">Cancel</button></a>
+                  <a href="javascript:history.go(-1);"><button class="btn btn-rounded span1" type="button" name="cancel">Cancel</button></a>
                 </div>
               </div>
             </div>

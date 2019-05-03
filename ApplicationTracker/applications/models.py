@@ -1,5 +1,10 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
+
+def get_upload_path(instance, filename):
+    return os.path.join("user_%d" % instance.owner.id, "company_%s" % instance.slug, filename)
+
 
 class Application(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
@@ -17,8 +22,8 @@ class Application(models.Model):
     posted_on = models.DateField(null=True, blank=True)
     closes_on = models.DateField(null=True, blank=True)
     applied_on = models.DateField(null=True, blank=True)
-    resume = models.FileField(upload_to='user/', null=True, blank=True)
-    cover_letter = models.FileField(upload_to='user/', null=True, blank=True)
+    resume = models.FileField(upload_to=get_upload_path, null=True, blank=True)
+    cover_letter = models.FileField(upload_to=get_upload_path, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_stale = models.BooleanField(default=False)
 

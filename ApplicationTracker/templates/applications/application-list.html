@@ -115,7 +115,8 @@
                   Text from most recent event update.
                 </p>
                 <a href="{% url 'detail' application.id %}" class="btn btn-color btn-rounded">View detail</a>
-                <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                <a href="{% url 'application-edit' application.id %}" class="btn btn-secondary btn-rounded">Edit</a>                
+                <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#deleteModal{{ application.id }}">Delete</a>
               </div>
             </div>
           </article>

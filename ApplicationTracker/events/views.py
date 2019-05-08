@@ -5,15 +5,15 @@ from .models import Event
 from applications.models import Application
 
 def validate_event_type(post_request):
-    if post_request['event_type'] in ['Application Submitted', 'Phone Screen', 'Technical Interview', 'On Site Interview', 'Job Offer', 'Note']:
+    if post_request.POST['event_type'] in ['Application Submitted', 'Phone Screen', 'Technical Interview', 'On Site Interview', 'Job Offer', 'Note']:
         return True
     else:
         return False
 
 def get_form_data(post_request, application_id):
-    application_fields = ['event_type', 'event_text', 'event_date']
-    form_data = {'application': application_id}
-    for field in application_fields:
+    event_fields = ['event_type', 'event_text', 'event_date']
+    form_data = {'application': Application.objects.get(pk=application_id)}
+    for field in event_fields:
         try:
             if post_request.POST[field] != "":
                 form_data[field] = post_request.POST[field]
@@ -45,7 +45,7 @@ def edit(request, event_id, application_id):
         'event': event_to_edit
     }
 
-    if request.method == 'POST' and event_to_edit.objects.get(user=request.user) and validate_event_type(request) == True:
+    if request.method == 'POST' and validate_event_type(request) == True:
         new_values = get_form_data(request, application_id)
         updated_event = Event(pk=event_id, **new_values)
         updated_event.save()
@@ -58,7 +58,8 @@ def edit(request, event_id, application_id):
 
 @login_required
 def delete(request, event_id, application_id):
-    event_to_delete = get_object_or_404(Event, pk=application_id, user=request.user)
+    parent_application = get_object_or_404(Application, pk=application_id, user=request.user)
+    event_to_delete = get_object_or_404(Event, pk=event_id, application=parent_application)
 
     if request.method == 'POST':
         event_to_delete.delete()

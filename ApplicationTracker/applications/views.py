@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from .models import Application
+from events.models import Event
 
 def get_form_data(post_request):
     application_fields = ['position', 'company', 'location', 'department', 'company_url', 'posting_url', 'portal_url', 'portal_login', 'portal_pass', 'posted_on', 'closes_on', 'applied_on', 'resume', 'cover_letter', 'body']
@@ -29,9 +30,11 @@ def index(request):
 @login_required
 def detail(request, application_id):
     application = get_object_or_404(Application, pk=application_id, user=request.user)
+    events = Event.objects.filter(application=application)
 
     context = {
-        'application': application
+        'application': application,
+        'events': events
     }
 
     return render(request, 'applications/application-detail.html', context)

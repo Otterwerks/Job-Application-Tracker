@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
@@ -8,4 +8,6 @@ urlpatterns = [
     path('<int:application_id>', views.detail, name='detail'),
     path('<int:application_id>/edit', views.edit, name='application-edit'),
     path('<int:application_id>/delete', views.delete, name='application-delete'),
+    path('<int:application_id>/event/', include('events.urls')),
+
 ]

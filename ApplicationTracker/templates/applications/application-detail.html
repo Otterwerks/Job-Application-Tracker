@@ -45,7 +45,7 @@
                     <li><a href="#two" data-toggle="tab"><i class="icon-list"></i> Description</a></li>
                     <li><a href="#three" data-toggle="tab"><i class="icon-info"></i> Info</a></li>
                     <li><a href="{% url 'application-edit' application.id %}"><i class="icon-pencil"></i> Edit</a></li>
-                    <li><a href="{% url 'event-add' application.id %}"><i class="icon-plus"></i> Add event</a></li>
+                    <li><a href="{% url 'event-add' application.id %}"><i class="icon-plus"></i> Event</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="one">
@@ -93,11 +93,14 @@
                 <div class="blank10"></div>
                   {% if events %}
                     {% for event in events %}
+                    {% include 'events/_event-delete.html' %}
                     <aside>
                       <div class="widget">
                         <h4>Event Type: {{ event.event_type }}</h4>
                         <h5>Date: {{ event.event_date }}</h5>
                         <p>{{ event.event_text }}</p>
+                        <a href="{% url 'event-edit' event.id application.id %}" class="btn btn-secondary btn-rounded">Edit</a>                
+                        <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#deleteModal{{ event.id }}">Delete</a>
                       </div>
                     </aside>
                     {% endfor %}

@@ -59,7 +59,8 @@ def edit(request, event_id, application_id):
 @login_required
 def delete(request, event_id, application_id):
     parent_application = get_object_or_404(Application, pk=application_id, user=request.user)
-    event_to_delete = get_object_or_404(Event, pk=event_id, application=parent_application)
+    event_to_delete = get_object_or_404(Event, pk=event_id)
+
 
     if request.method == 'POST':
         event_to_delete.delete()

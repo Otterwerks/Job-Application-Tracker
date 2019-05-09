@@ -28,7 +28,7 @@ def add(request, application_id):
         event_data = get_form_data(request, application_id)
         new_event = Event.objects.create(**event_data)
         messages.success(request, 'New event added')
-        return redirect('applications')
+        return redirect('detail', application_id)
 
     else:
         context = {
@@ -51,7 +51,7 @@ def edit(request, event_id, application_id):
         updated_event = Event(pk=event_id, **new_values)
         updated_event.save()
         messages.success(request, 'Event updated')
-        return redirect('applications')
+        return redirect('detail', application_id)
 
     else:
         return render(request, 'events/event-edit.html', context)
@@ -64,8 +64,8 @@ def delete(request, event_id, application_id):
 
     if request.method == 'POST':
         event_to_delete.delete()
-        return redirect('applications')
+        return redirect('detail', application_id)
 
     else:
-        return redirect('applications')
+        return redirect('detail', application_id)
         

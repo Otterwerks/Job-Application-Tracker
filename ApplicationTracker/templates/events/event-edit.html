@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} | Edit Application{% endblock %}
+{% block title %} | Edit Event{% endblock %}
 
 {% block content %}
 
@@ -22,76 +22,32 @@
         <div class="span3">
           <aside>
             <div class="widget">
-                <h5 class="center">Edit Application</h5>
-                <p>Fill out the form with as many details as you can about the job you applied to. This will modify update the application with new details.</p>
+                <h5 class="center">Edit Event</h5>
+                <p>Make sure details of the update are accurate by editing the event.</p>
             </div>
           </aside>
         </div>
         <div class="span1"></div>
           <div id="errormessage"></div>
-          <form action="{% url 'application-edit' application.id %}" method="POST" role="form" enctype="multipart/form-data" class="contactForm span8">
+          <form action="{% url 'event-edit' application.id event.id %}" method="POST" role="form" enctype="multipart/form-data" class="contactForm span8">
             {% csrf_token %}
             <div class="row">
               <div class="span4 form-group">
-                <input type="text" class="form-control" id="position" name="position" value="{{ application.position }}" placeholder="Position applied for" data-rule="minlen:6" data-msg="Please enter at least 6 char(s)" />
+                <select id="event_type" name="event_type">
+                  <option {% if event.event_type == 'Application Submitted' %} selected {% endif %}>Application Submitted</option>
+                  <option {% if event.event_type == 'Phone Screen' %} selected {% endif %}>Phone Screen</option>
+                  <option {% if event.event_type == 'Technical Interview' %} selected {% endif %}>Technical Interview</option>
+                  <option {% if event.event_type == 'On Site Interview' %} selected {% endif %}>On Site Interview</option>
+                  <option {% if event.event_type == 'Job Offer' %} selected {% endif %}>Job Offer</option>
+                  <option {% if event.event_type == 'Note' %} selected {% endif %}>Note</option>
+                </select>
+              </div>
+              <div class="span4 form-group">
+                <input type="date" class="form-control" id="event_date" name="event_date" {% if event.event_date %} value="{{ event.event_date }}" {% endif %} placeholder="Date of event" />
                 <div class="validation"></div>
               </div>
               <div class="span4 form-group">
-                <input type="text" class="form-control" id="company" name="company" value="{{ application.company }}" placeholder="Company" data-rule="minlen:6" data-msg="Please enter at least 6 char(s)" />
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="text" class="form-control" id="location" name="location" {% if application.location %} value="{{ application.location }}" {% endif %} placeholder="Location"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="text" class="form-control" id="department" name="department" {% if application.department %} value="{{ application.department }}" {% endif %} placeholder="Department"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="text" class="form-control" id="company_url" name="company_url" {% if application.company_url %} value="{{ application.company_url }}" {% endif %} placeholder="Company URL link"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="text" class="form-control" id="posting_url" name="posting_url" {% if application.posting_url %} value="{{ application.posting_url }}" {% endif %} placeholder="URL link to job posting"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="text" class="form-control" id="portal_url" name="portal_url" {% if application.portal_url %} value="{{ application.portal_url }}" {% endif %} placeholder="URL link to company portal"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="text" class="form-control" id="portal_login" name="portal_login" {% if application.portal_login %} value="{{ application.portal_login }}" {% endif %} placeholder="Username for company portal"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="text" class="form-control" id="portal_pass" name="portal_pass" {% if application.portal_pass %} value="{{ application.portal_pass }}" {% endif %} placeholder="Password for company portal"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="date" class="form-control" id="posted_on" name="posted_on" {% if application.posted_on %} value="{{ application.posted_on }}" {% endif %} placeholder="Date job posted"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="date" class="form-control" id="closes_on" name="closes_on" {% if application.closes_on %} value="{{ application.closes_on }}" {% endif %} placeholder="Date job closes"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <input type="date" class="form-control" id="applied_on" name="applied_on" {% if application.applied_on %} value="{{ application.applied_on }}" {% endif %} placeholder="Date applied"/>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <textarea class="form-control" name="body" rows="5" {% if application.body %} value="{{ application.body }}" {% endif %} placeholder="Copy job posting text into this field"></textarea>
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <p>Upload Resume:</p>
-                <input type="file" class="form-control" id="resume" name="resume" placeholder="resume" />
-                <div class="validation"></div>
-              </div>
-              <div class="span4 form-group">
-                <p>Upload Cover Letter:</p>
-                <input type="file" class="form-control" id="cover_letter" name="cover_letter" placeholder="cover_letter" />
+                <textarea class="form-control" name="event_text" rows="5" value="{{ event.event_text }}" placeholder="Describe the update here..."></textarea>
                 <div class="validation"></div>
               </div>
               <div class="span1 form-group">

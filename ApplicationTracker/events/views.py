@@ -42,7 +42,8 @@ def edit(request, event_id, application_id):
     parent_application = get_object_or_404(Application, pk=application_id, user=request.user)
 
     context = {
-        'event': event_to_edit
+        'event': event_to_edit,
+        'application': parent_application
     }
 
     if request.method == 'POST' and validate_event_type(request) == True:
@@ -60,7 +61,6 @@ def edit(request, event_id, application_id):
 def delete(request, event_id, application_id):
     parent_application = get_object_or_404(Application, pk=application_id, user=request.user)
     event_to_delete = get_object_or_404(Event, pk=event_id)
-
 
     if request.method == 'POST':
         event_to_delete.delete()

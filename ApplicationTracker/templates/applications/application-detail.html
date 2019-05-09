@@ -99,7 +99,7 @@
                         <h4>Event Type: {{ event.event_type }}</h4>
                         <h5>Date: {{ event.event_date }}</h5>
                         <p>{{ event.event_text }}</p>
-                        <a href="{% url 'event-edit' event.id application.id %}" class="btn btn-secondary btn-rounded">Edit</a>                
+                        <a href="{% url 'event-edit' application.id event.id %}" class="btn btn-secondary btn-rounded">Edit</a>                
                         <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#deleteModal{{ event.id }}">Delete</a>
                       </div>
                     </aside>

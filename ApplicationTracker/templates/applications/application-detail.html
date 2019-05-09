@@ -30,8 +30,8 @@
           <article>
             <div class="heading">
               <h3><strong>{{ application.position }} @ {{ application.company }}</strong></h3>
-              <div class="progress progress-striped active">
-                <div class="bar" style="width: 80%;"></div>
+              <div class="progress {% if progress == 100 %} progress-success {% else %} progress-striped active {% endif %}">
+                <div class="bar" style="width: {{ progress }}%;"></div>
             </div>
             </div>
             
@@ -96,9 +96,9 @@
                     {% include 'events/_event-delete.html' %}
                     <aside>
                       <div class="widget">
-                        <h4>Event Type: {{ event.event_type }}</h4>
-                        <h5>Date: {{ event.event_date }}</h5>
-                        <p>{{ event.event_text }}</p>
+                        <h4 class="text-success">{{ event.event_type }}</h4>
+                        <h5>{{ event.event_date }}</h5>
+                        <p class="lead">{{ event.event_text }}</p>
                         <a href="{% url 'event-edit' application.id event.id %}" class="btn btn-secondary btn-rounded">Edit</a>                
                         <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#deleteModal{{ event.id }}">Delete</a>
                       </div>

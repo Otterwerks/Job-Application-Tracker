@@ -64,6 +64,7 @@ def delete(request, event_id, application_id):
 
     if request.method == 'POST':
         event_to_delete.delete()
+        messages.warning(request, 'Event removed')
         return redirect('detail', application_id)
 
     else:

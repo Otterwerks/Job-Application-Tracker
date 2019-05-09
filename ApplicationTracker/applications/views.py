@@ -16,6 +16,23 @@ def get_form_data(post_request):
             pass
     return form_data
 
+def get_progress(events):
+    for event in events:
+        if event.event_type == 'Job Offer':
+            return 100
+    for event in events:
+        if event.event_type == 'On Site Interview':
+            return 88
+    for event in events:
+        if event.event_type == 'Technical Interview':
+            return 75
+    for event in events:
+        if event.event_type == 'Phone Screen':
+            return 45
+    for event in events:
+        if event.event_type == 'Application Submitted':
+            return 25
+    return 0
 
 @login_required
 def index(request):
@@ -30,11 +47,13 @@ def index(request):
 @login_required
 def detail(request, application_id):
     application = get_object_or_404(Application, pk=application_id, user=request.user)
-    events = Event.objects.filter(application=application)
+    events = Event.objects.order_by('-event_date', '-id').filter(application=application)
+    progress = get_progress(events)
 
     context = {
         'application': application,
-        'events': events
+        'events': events,
+        'progress': progress
     }
 
     return render(request, 'applications/application-detail.html', context)
@@ -44,6 +63,7 @@ def add(request):
     if request.method == 'POST':
         application_data = get_form_data(request)
         new_application = Application.objects.create(**application_data)
+        default_event = Event.objects.create(application=new_application, event_type='Application Submitted', event_text='You applied to this job!')
         messages.success(request, 'New application added')
         return redirect('dashboard')
 
@@ -75,6 +95,7 @@ def delete(request, application_id):
 
     if request.method == 'POST':
         application_to_delete.delete()
+        messages.warning(request, 'Application removed')
         return redirect('applications')
 
     else:

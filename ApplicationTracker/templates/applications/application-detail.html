@@ -57,7 +57,7 @@
                                 <li><label>Position :</label> {{ application.position }} </li>
                                 {% if application.applied_on %}<li><label>Applied On :</label> 12 June 2013</li>{% endif %}
                                 {% comment %} {% if  %}<li><label>Last Updated On :</label> 12 June 2013</li>{% endif %} {% endcomment %}
-                                <li><label>Stage :</label> Technical Interview</li>
+                                {% if application.status %}<li><label>Stage :</label> {{ application.status }}</li>{% endif %}
                                 {% if application.posting_url %}<li><label>Original Ad :</label><a href="{{ application.posting_url }}">Click here</a></li>{% endif %}
                                 </ul>
                             </div>

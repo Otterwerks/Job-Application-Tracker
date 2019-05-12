@@ -45,6 +45,56 @@ def index(request):
     return render(request, 'applications/application-list.html', context)
 
 @login_required
+def offer(request):
+    applications = Application.objects.filter(user=request.user, status='Job Offer')
+
+    context = {
+        'applications': applications
+    }
+
+    return render(request, 'applications/application-list.html', context)
+
+@login_required
+def onsite(request):
+    applications = Application.objects.filter(user=request.user, status='On Site Interview')
+
+    context = {
+        'applications': applications
+    }
+
+    return render(request, 'applications/application-list.html', context)
+
+@login_required
+def technical(request):
+    applications = Application.objects.filter(user=request.user, status='Technical Interview')
+
+    context = {
+        'applications': applications
+    }
+
+    return render(request, 'applications/application-list.html', context)
+
+@login_required
+def phonescreen(request):
+    applications = Application.objects.filter(user=request.user, status='Phone Screen')
+
+    context = {
+        'applications': applications
+    }
+
+    return render(request, 'applications/application-list.html', context)
+
+@login_required
+def submitted(request):
+    applications = Application.objects.filter(user=request.user, status='Application Submitted')
+
+    context = {
+        'applications': applications
+    }
+
+    return render(request, 'applications/application-list.html', context)
+
+@login_required
 def detail(request, application_id):
     application = get_object_or_404(Application, pk=application_id, user=request.user)
     events = Event.objects.order_by('-event_date', '-id').filter(application=application)

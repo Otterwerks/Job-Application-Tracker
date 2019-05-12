@@ -1,4 +1,5 @@
 from applications.models import Application
+from django.shortcuts import get_object_or_404
 from .models import Event
 
 def validate_event_type(post_request):
@@ -8,15 +9,17 @@ def validate_event_type(post_request):
         return False
 
 def build_application_with_status(request, application_id, events):
+    parent_application = get_object_or_404(Application, pk=application_id, user=request.user)
     for item in ['Job Offer', 'On Site Interview', 'Technical Interview', 'Phone Screen', 'Application Submitted']:
         for event in events:
             status = event.event_type
             if status == item:
-                application_status = Application(pk=application_id, user=request.user, status=status)
-                return application_status
+                parent_application.status = status
+                return parent_application
+    return parent_application
 
 def update_application_status(request, application_id):
         events = Event.objects.filter(application=Application.objects.get(pk=application_id))
-        new_application_status = build_application_with_status(request, application_id, events)
-        new_application_status.save()
+        application_status = build_application_with_status(request, application_id, events)
+        application_status.save()
         return

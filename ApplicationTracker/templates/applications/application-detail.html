@@ -76,11 +76,10 @@
                           <h4>Information</h4>
                           <ul class="project-detail">
                             {% if application.resume %}<li><label>Resume :</label> <a href="">View</a> </li>{% endif %}
-                            <li><label>Cover Letter :</label> filename </li>
-                            <li><label>Email Contact :</label> person@company.com</li>
-                            <li><label>Portal URL :</label> <a href="#">www.website.com</a></li>
-                            <li><label>Portal Username :</label> user</li>
-                            <li><label>Portal Password :</label> pass</li>
+                            {% if application.cover_letter %}<li><label>Cover Letter :</label> <a href="">View</a> </li>{% endif %}
+                            {% if application.portal_url %}<li><label>Portal URL :</label> <a href="{{ application.portal_url }}">{{ application.portal_url }}</a></li>{% endif %}
+                            {% if application.portal_login %}<li><label>Portal Username :</label> {{ application.portal_login }}</li>{% endif %}
+                            {% if application.portal_pass %}<li><label>Portal Password :</label> {{ application.portal_pass }}</li>{% endif %}
                           </ul>
                         </div>
                       </aside>

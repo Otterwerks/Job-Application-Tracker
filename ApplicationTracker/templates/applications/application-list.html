@@ -35,12 +35,11 @@
           <div class="widget">
             <h4>View Status</h4>
             <ul class="cat">
-              <li><a href="#">Offer (8)</a></li>
-              <li><a href="#">On Site (11)</a></li>
-              <li><a href="#">Coding Challenge (20)</a></li>
-              <li><a href="#">Technical Interview (43)</a></li>
-              <li><a href="#">Phone Screen (67)</a></li>
-              <li><a href="#">Application Submitted (118)</a></li>
+              <li><a href="{% url 'sort-offer' %}">Offer (8)</a></li>
+              <li><a href="{% url 'sort-onsite' %}">On Site (11)</a></li>
+              <li><a href="{% url 'sort-technical' %}">Technical Interview (43)</a></li>
+              <li><a href="{% url 'sort-phonescreen' %}">Phone Screen (67)</a></li>
+              <li><a href="{% url 'sort-submitted' %}">Application Submitted (118)</a></li>
             </ul>
           </div>
           <div class="widget">

@@ -16,7 +16,6 @@ def get_form_data(post_request, application_id):
             pass
     return form_data
 
-
 @login_required
 def add(request, application_id):
     if request.method == 'POST' and validate_event_type(request) == True:

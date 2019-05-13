@@ -35,58 +35,11 @@ def get_progress(events):
     return 0
 
 @login_required
-def index(request):
-    applications = Application.objects.filter(user=request.user)
-
-    context = {
-        'applications': applications
-    }
-
-    return render(request, 'applications/application-list.html', context)
-
-@login_required
-def offer(request):
-    applications = Application.objects.filter(user=request.user, status='Job Offer')
-
-    context = {
-        'applications': applications
-    }
-
-    return render(request, 'applications/application-list.html', context)
-
-@login_required
-def onsite(request):
-    applications = Application.objects.filter(user=request.user, status='On Site Interview')
-
-    context = {
-        'applications': applications
-    }
-
-    return render(request, 'applications/application-list.html', context)
-
-@login_required
-def technical(request):
-    applications = Application.objects.filter(user=request.user, status='Technical Interview')
-
-    context = {
-        'applications': applications
-    }
-
-    return render(request, 'applications/application-list.html', context)
-
-@login_required
-def phonescreen(request):
-    applications = Application.objects.filter(user=request.user, status='Phone Screen')
-
-    context = {
-        'applications': applications
-    }
-
-    return render(request, 'applications/application-list.html', context)
-
-@login_required
-def submitted(request):
-    applications = Application.objects.filter(user=request.user, status='Application Submitted')
+def index(request, status='all'):
+    if status == 'all':
+        applications = Application.objects.filter(user=request.user)
+    else:
+        applications = Application.objects.filter(user=request.user, status=status)
 
     context = {
         'applications': applications

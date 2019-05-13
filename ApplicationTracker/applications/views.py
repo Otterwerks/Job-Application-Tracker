@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
-from .models import Application
 from events.models import Event
+from .models import Application
+from collections import namedtuple
+import datetime
 
 def get_form_data(post_request):
     application_fields = ['position', 'company', 'location', 'department', 'company_url', 'posting_url', 'portal_url', 'portal_login', 'portal_pass', 'posted_on', 'closes_on', 'applied_on', 'resume', 'cover_letter', 'body']
-    form_data = {'user': post_request.user}
+    form_data = {'user': post_request.user, 'last_updated': datetime.datetime.now()}
     for field in application_fields:
         try:
             if post_request.POST[field] != "":
@@ -36,14 +38,34 @@ def get_progress(events):
 
 @login_required
 def index(request, status='all'):
+    all_applications = Application.objects.filter(user=request.user)
     if status == 'all':
-        applications = Application.objects.filter(user=request.user)
+        applications = all_applications
     else:
         applications = Application.objects.filter(user=request.user, status=status)
 
+    status_count = {
+            'Job_Offer': 0,
+            'On_Site_Interview': 0,
+            'Technical_Interview': 0,
+            'Phone_Screen': 0,
+            'Application_Submitted': 0,
+            'All': len(all_applications)
+        }
+
+    for application in all_applications:
+        if application.status:
+            status = application.status.replace(' ', '_')
+            status_count[status] += 1
+            
+    data = namedtuple('Data', status_count.keys())(**status_count)
+
     context = {
-        'applications': applications
+        'applications': applications,
+        'template_data': data
     }
+
+    print(data.Application_Submitted)
 
     return render(request, 'applications/application-list.html', context)
 

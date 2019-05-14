@@ -34,52 +34,28 @@
           </div>
           <div class="widget">
             <h4>View Status</h4>
-            <ul class="">
-              <li><a href="{% url 'application-sort' 'Job Offer' %}">Offer ({{ template_data.Job_Offer }})</a></li>
-              <li><a href="{% url 'application-sort' 'On Site Interview' %}">On Site ({{ template_data.On_Site_Interview }})</a></li>
-              <li><a href="{% url 'application-sort' 'Technical Interview' %}">Technical Interview ({{ template_data.Technical_Interview }})</a></li>
-              <li><a href="{% url 'application-sort' 'Phone Screen' %}">Phone Screen ({{ template_data.Phone_Screen }})</a></li>
-              <li><a href="{% url 'application-sort' 'Application Submitted' %}">Application Submitted ({{ template_data.Application_Submitted }})</a></li>
-              <li><a href="{% url 'applications' %}">All ({{ template_data.All }})</a></li>
+            <ul class="lead">
+              <li><a href="{% url 'application-sort' 'Job Offer' %}">Offer ({{ template_data.Job_Offer }})</a>{% if '/sort/Job' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
+              <li><a href="{% url 'application-sort' 'On Site Interview' %}">On Site ({{ template_data.On_Site_Interview }})</a>{% if '/sort/On' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
+              <li><a href="{% url 'application-sort' 'Technical Interview' %}">Technical Interview ({{ template_data.Technical_Interview }})</a>{% if '/sort/Technical' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
+              <li><a href="{% url 'application-sort' 'Phone Screen' %}">Phone Screen ({{ template_data.Phone_Screen }})</a>{% if '/sort/Phone' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
+              <li><a href="{% url 'application-sort' 'Application Submitted' %}">Application Submitted ({{ template_data.Application_Submitted }})</a>{% if '/sort/Application' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
+              <li><a href="{% url 'applications' %}">All ({{ template_data.All }})</a>{% if '/sort/' not in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
             </ul>
           </div>
           <div class="widget">
             <h4>Recent Active Applications</h4>
             <ul class="recent-posts">
-              <li><a href="#">position @ company</a>
+            {% if recent_apps %}
+            {% for app in recent_apps %}
+              <li><a href="{% url 'detail' app.id %}">{{ app.position }} @ {{ app.company }}</a>
                 <div class="clear">
                 </div>
-                <span class="date"><i class="icon-calendar"></i> 6 March, 2013</span>
-                <span class="comment"><i class="icon-comment"></i> 4 Events</span>
+                <span class="date"><i class="icon-calendar"></i> {{ app.date }}</span>
+                <span class="comment"><i class="icon-comment"></i> {{ app.number_of_events }} Event(s)</span>
               </li>
-              <li><a href="#">position @ company</a>
-                <div class="clear">
-                </div>
-                <span class="date"><i class="icon-calendar"></i> 6 March, 2013</span>
-                <span class="comment"><i class="icon-comment"></i> 2 Events</span>
-              </li>
-              <li><a href="#">position @ company</a>
-                <div class="clear">
-                </div>
-                <span class="date"><i class="icon-calendar"></i> 4 March, 2013</span>
-                <span class="comment"><i class="icon-comment"></i> 12 Events</span>
-              </li>
-              <li><a href="#">position @ company</a>
-                <div class="clear">
-                </div>
-                <span class="date"><i class="icon-calendar"></i> 3 March, 2013</span>
-                <span class="comment"><i class="icon-comment"></i> 3 Events</span>
-              </li>
-            </ul>
-          </div>
-          <div class="widget">
-            <h4>Tags</h4>
-            <ul class="tags">
-              <li><a href="#">Front End</a></li>
-              <li><a href="#">Back End</a></li>
-              <li><a href="#">Full Stack</a></li>
-              <li><a href="#">Remote</a></li>
-              <li><a href="#">Preferred</a></li>
+            {% endfor %}
+            {% endif %}
             </ul>
           </div>
         </aside>
@@ -101,15 +77,15 @@
                   <i class="icon-bg-dark icon-circled icon-dollar icon-3x active"></i>
                 </div>
                 <ul class="post-meta">
-                  <li class="first"><i class="icon-calendar"></i><span>{{ application.last_updated }}</span></li>
-                  <li><i class="icon-list-alt"></i><span><a href="#">3 events</a></span></li>
-                  <li class="last"><i class="icon-tags"></i><span><a href="#">Full Stack</a>, <a href="#">Remote</a>, <a href="#">Preferred</a></span></li>
+                  <li class="first"><i class="icon-calendar"></i><span>{{ application.date }}</span></li>
+                  <li><i class="icon-list-alt"></i><span>{{ application.number_of_events }} Event(s)</span></li>
+                  <li class="last"><i class="icon-tags"></i><span></span></li>
                 </ul>
                 <div class="clear"></div>
               </div>
               <div class="span5">
                 <div class="progress progress-striped">
-                  <div class="bar" style="width: 80%;"></div>
+                  <div class="bar" style="width: {{ application.progress }}%;"></div>
                 </div>
                 <p>
                   Text from most recent event update.
@@ -135,6 +111,5 @@
     </div>
   </div>
 </section>
-
 
 {% endblock %}

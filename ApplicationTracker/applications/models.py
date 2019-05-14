@@ -26,7 +26,7 @@ class Application(models.Model):
     cover_letter = models.FileField(upload_to=get_upload_path, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_stale = models.BooleanField(default=False)
-    last_updated = models.DateField(default=datetime.datetime.now, blank=True)
+    last_updated = models.DateTimeField(default=datetime.datetime.now, blank=True)
 
     def __str__(self):
         return (self.position + ' @ ' + self.company)

@@ -4,9 +4,10 @@ from django.contrib import messages
 from .models import Event
 from applications.models import Application
 from .event_helper_functions import update_application_status, validate_event_type
+from dateutil.parser import parse
 
 def get_form_data(post_request, application_id):
-    event_fields = ['event_type', 'event_text', 'event_date']
+    event_fields = ['event_type', 'event_text']
     form_data = {'application': Application.objects.get(pk=application_id)}
     for field in event_fields:
         try:
@@ -14,6 +15,10 @@ def get_form_data(post_request, application_id):
                 form_data[field] = post_request.POST[field]
         except:
             pass
+    try:
+        form_data['event_date'] = parse(post_request.POST['event_date'])
+    except:
+        return redirect('detail', application_id)
     return form_data
 
 @login_required

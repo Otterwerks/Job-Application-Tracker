@@ -35,6 +35,21 @@ def get_progress(event_type):
     else:
         return 0
 
+def get_icon(event_type):
+    if event_type == 'Job Offer':
+        return 'icon-dollar'
+    elif event_type == 'On Site Interview':
+        return 'icon-map-marker'
+    elif event_type == 'Technical Interview':
+        return 'icon-wrench'
+    elif event_type == 'Phone Screen':
+        return 'icon-phone'
+    elif event_type == 'Application Submitted':
+        return 'icon-ok-circle'
+    else:
+        return 'icon-question-sign'
+
+
 
 @login_required
 def index(request, status='all'):
@@ -43,7 +58,7 @@ def index(request, status='all'):
     if status == 'all':
         applications = all_applications
     else:
-        applications = Application.objects.filter(user=request.user, status=status).annotate(number_of_events=Count('event'))
+        applications = Application.objects.filter(user=request.user, status=status).annotate(number_of_events=Count('event'), date=Cast('last_updated', DateField()))
 
     status_count = {
         'Job_Offer': 0,
@@ -57,8 +72,14 @@ def index(request, status='all'):
     for app in applications:
         if app.status:
             app.progress = get_progress(app.status)
-
-    print(applications)
+            app.icon = get_icon(app.status)
+        else:
+            app.progress = 0
+            app.icon = 'icon-question-sign'
+        if Event.objects.filter(application = app):
+            app.recent_event = Event.objects.filter(application = app).latest('event_date')
+        else:
+            app.recent_event = 'This application has no events'
 
     for application in all_applications:
         if application.status:

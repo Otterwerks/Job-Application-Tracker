@@ -45,7 +45,7 @@
           </div>
           <div class="widget">
             <h4>Recent Active Applications</h4>
-            <ul class="recent-posts">
+            <ul class="recent-posts lead">
             {% if recent_apps %}
             {% for app in recent_apps %}
               <li><a href="{% url 'detail' app.id %}">{{ app.position }} @ {{ app.company }}</a>
@@ -74,7 +74,7 @@
             <div class="row">
               <div class="span3">
                 <div class="post-icon">
-                  <i class="icon-bg-dark icon-circled icon-dollar icon-3x active"></i>
+                  <i class="icon-bg-dark icon-circled {{ application.icon }} icon-3x active"></i>
                 </div>
                 <ul class="post-meta">
                   <li class="first"><i class="icon-calendar"></i><span>{{ application.date }}</span></li>
@@ -88,7 +88,7 @@
                   <div class="bar" style="width: {{ application.progress }}%;"></div>
                 </div>
                 <p>
-                  Text from most recent event update.
+                  {{ application.recent_event.event_text }}
                 </p>
                 <a href="{% url 'detail' application.id %}" class="btn btn-color btn-rounded">View detail</a>
                 <a href="{% url 'application-edit' application.id %}" class="btn btn-secondary btn-rounded">Edit</a>                

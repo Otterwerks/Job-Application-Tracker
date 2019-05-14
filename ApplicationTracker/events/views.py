@@ -16,7 +16,8 @@ def get_form_data(post_request, application_id):
         except:
             pass
     try:
-        form_data['event_date'] = parse(post_request.POST['event_date'])
+        if post_request.POST['event_date'] != "":
+            form_data['event_date'] = parse(post_request.POST['event_date'])
     except:
         return redirect('detail', application_id)
     return form_data

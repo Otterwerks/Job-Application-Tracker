@@ -9,9 +9,11 @@ from events.models import Event
 from .models import Application
 from collections import namedtuple
 import datetime
+from dateutil.parser import parse
 
 def get_form_data(post_request):
-    application_fields = ['position', 'company', 'location', 'department', 'company_url', 'posting_url', 'portal_url', 'portal_login', 'portal_pass', 'posted_on', 'closes_on', 'applied_on', 'resume', 'cover_letter', 'body']
+    application_fields = ['position', 'company', 'location', 'department', 'company_url', 'posting_url', 'portal_url', 'portal_login', 'portal_pass', 'resume', 'cover_letter', 'body']
+    date_fields = ['posted_on', 'closes_on', 'applied_on']
     form_data = {'user': post_request.user, 'last_updated': datetime.datetime.now()}
     for field in application_fields:
         try:
@@ -19,6 +21,12 @@ def get_form_data(post_request):
                 form_data[field] = post_request.POST[field]
         except:
             pass
+    for field in date_fields:
+        try:
+            if post_request.POST[field] != "":
+                form_data[field] = parse(post_request.POST[field])
+        except:
+            return redirect('applications')
     return form_data
 
 def get_progress(event_type):
@@ -41,7 +49,7 @@ def get_icon(event_type):
     elif event_type == 'On Site Interview':
         return 'icon-map-marker'
     elif event_type == 'Technical Interview':
-        return 'icon-wrench'
+        return 'icon-code'
     elif event_type == 'Phone Screen':
         return 'icon-phone'
     elif event_type == 'Application Submitted':
@@ -132,7 +140,7 @@ def edit(request, application_id):
 
     if request.method == 'POST':
         new_values = get_form_data(request)
-        updated_application = Application(pk=application_id, **new_values)
+        updated_application = Application(pk=application_id, status=application_to_edit.status, **new_values)
         updated_application.save()
         messages.success(request, 'Application updated')
         return redirect('applications')

@@ -1,0 +1,36 @@
+
+<div class="modal fade" id="statusModal{{ application.id }}" tabindex="-1" role="dialog" aria-labelledby="centeredStatusModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header color">
+      <h5></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><h3>&times;</h3></span>
+        </button>
+        <h5 class="modal-title">Application Event</h5>
+      </div>
+      <div class="modal-body">
+      {% if application.status %}
+        {% if application.status == 'Application Submitted' %}
+          <h6>This application has been submitted, add an event update when you are contacted about this position.</h6>
+        {% elif application.status == 'Phone Screen' %}
+          <h6>Get to know more about the company and position during a phone screen.</h6>
+        {% elif application.status == 'Technical Interview' %}
+          <h6>Demonstrate your ability during a technical interview.</h6>
+        {% elif application.status == 'On Site Interview' %}
+          <h6>Save the address and visit in person for an on site interview.</h6>
+        {% elif application.status == 'Job Offer' %}
+          <h6>This company made you an offer!</h6>
+        {% else %}
+          <h6>View application details for more information.</h6>
+        {% endif %}
+      {% else %}
+        <h6>Add an event to track the status of this application.</h6>
+      {% endif %}
+      </div>
+      <div class="modal-footer">
+        <p><button type="button" class="close" data-dismiss="modal" aria-label="Close">Close</button></p>
+      </div>
+    </div>
+  </div>
+</div>

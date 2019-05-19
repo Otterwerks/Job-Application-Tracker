@@ -41,6 +41,7 @@
               <li><a href="{% url 'application-sort' 'Phone Screen' %}">Phone Screen ({{ template_data.Phone_Screen }})</a>{% if '/sort/Phone' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
               <li><a href="{% url 'application-sort' 'Application Submitted' %}">Application Submitted ({{ template_data.Application_Submitted }})</a>{% if '/sort/Application' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
               <li><a href="{% url 'applications' %}">All ({{ template_data.All }})</a>{% if '/sort/' not in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
+              <li><a href="{% url 'application-sort' 'Archived' %}">View Archive ({{ template_data.Archived }})</a>{% if '/sort/Archived' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>            
             </ul>
           </div>
           <div class="widget">
@@ -94,6 +95,12 @@
                 <a href="{% url 'detail' application.id %}" class="btn btn-color btn-rounded">View detail</a>
                 <a href="{% url 'application-edit' application.id %}" class="btn btn-secondary btn-rounded">Edit</a>                
                 <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#deleteModal{{ application.id }}">Delete</a>
+                <a class="btn btn-info btn-rounded" href="javascript:{document.getElementById('archive{{ application.id }}').submit()}">{% if application.is_active %}Archive{% else %}Unarchive{% endif %}</a>
+                <form id="archive{{ application.id }}" action="{% url 'archive' application.id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="archive" value="{% if application.is_active %}False{% else %}True{% endif %}">
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                </form>
               </div>
             </div>
           </article>

@@ -62,11 +62,14 @@ def get_icon(event_type):
 @login_required
 def index(request, status='all'):
     all_applications = Application.objects.filter(user=request.user).order_by('-last_updated').annotate(number_of_events=Count('event'), date=Cast('last_updated', DateField()))
-
+    active_applications = Application.objects.filter(user=request.user, is_active=True).order_by('-last_updated').annotate(number_of_events=Count('event'), date=Cast('last_updated', DateField()))
+    
     if status == 'all':
-        applications = all_applications
+        applications = active_applications
+    elif status == 'Archived':
+        applications = Application.objects.filter(user=request.user, is_active=False).order_by('-last_updated').annotate(number_of_events=Count('event'), date=Cast('last_updated', DateField()))
     else:
-        applications = Application.objects.filter(user=request.user, status=status).annotate(number_of_events=Count('event'), date=Cast('last_updated', DateField()))
+        applications = Application.objects.filter(user=request.user, status=status, is_active=True).order_by('-last_updated').annotate(number_of_events=Count('event'), date=Cast('last_updated', DateField()))
 
     status_count = {
         'Job_Offer': 0,
@@ -74,7 +77,8 @@ def index(request, status='all'):
         'Technical_Interview': 0,
         'Phone_Screen': 0,
         'Application_Submitted': 0,
-        'All': len(all_applications)
+        'All': len(active_applications),
+        'Archived': len(all_applications) - len(active_applications),
     }
 
     for app in applications:
@@ -90,7 +94,7 @@ def index(request, status='all'):
             app.recent_event = 'This application has no events'
 
     for application in all_applications:
-        if application.status:
+        if application.status and application.is_active:
             status = application.status.replace(' ', '_')
             status_count[status] += 1
             
@@ -103,6 +107,17 @@ def index(request, status='all'):
     }
 
     return render(request, 'applications/application-list.html', context)
+
+@login_required
+def archive(request, application_id):
+    if request.method == 'POST':
+        application = get_object_or_404(Application, pk=application_id, user=request.user)
+        application.is_active = request.POST['archive']
+        application.save()
+        next = request.POST.get('next', '/')
+        return redirect(next)
+    else:
+        return redirect('applications')
 
 @login_required
 def detail(request, application_id):

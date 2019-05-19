@@ -122,10 +122,13 @@ def detail(request, application_id):
 def add(request):
     if request.method == 'POST':
         application_data = get_form_data(request)
-        new_application = Application.objects.create(**application_data)
+        new_application = Application.objects.create(**application_data, status='Application Submitted')
         default_event = Event.objects.create(application=new_application, event_type='Application Submitted', event_text='You applied to this job!')
+        if application_data['applied_on']:
+            default_event.event_date = application_data['applied_on']
+            default_event.save()
         messages.success(request, 'New application added')
-        return redirect('dashboard')
+        return redirect('applications')
 
     else:
         return render(request, 'applications/application-add.html')

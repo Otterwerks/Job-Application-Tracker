@@ -4,6 +4,82 @@
 
 {% block content %}
 
-<h1>Dashboard</h1>
+  <section id="subintro">
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <h3>user <strong>Dashboard</strong></h3>
+        </div>
+        <div class="span8">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="maincontent">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <article>
+
+            
+            <div class="clearfix">
+            </div>
+            <div class="row">
+              <div class="span12">
+                <div class="tabbable">
+                <ul class="nav nav-tabs bold">
+                    <li class="active"><a href="#one" data-toggle="tab"><i class="icon-filter"></i> Your Funnel</a></li>
+                    <li><a href="#two" data-toggle="tab"><i class="icon-filter"></i> Site Funnel</a></li>
+                    <li><a href="#three" data-toggle="tab"><i class="icon-info"></i> Resources</a></li>
+                    <li><a href="{% url 'applications' %}"><i class="icon-pencil"></i> View Applications</a></li>
+                    <li><a href="{% url 'application-add' %}"><i class="icon-plus"></i> Add Application</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="one">
+                        <aside>
+                            <div class="">
+                                <h4>Your Recruitment Funnel</h4>
+                                <div class="span8"><br><br>{{ app_chart|safe }}</div>
+
+                            </div>
+                        </aside>
+                    </div>
+                    <div class="tab-pane" id="two">
+                        <aside>
+                            <div class="">
+                                <h4>Site Wide Recruitment Funnel (%)</h4>
+                                <div class="span8"><br><br>{{ site_chart|safe }}</div>
+
+                            </div>
+                        </aside>
+                    </div>
+                    <div class="tab-pane" id="three">
+                      <aside>
+                        <div class="widget">
+                          <h4>Job Search Resources</h4>
+                          
+                        </div>
+                      </aside>
+                    </div>
+                </div>
+              </div>
+              </div>
+              <div class="span6">
+                <div class="blank20"></div>
+                <div class="blank10"></div>
+                  
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+<script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
 
 {% endblock %}

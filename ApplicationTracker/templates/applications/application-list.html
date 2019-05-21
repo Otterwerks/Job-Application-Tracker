@@ -40,7 +40,7 @@
               <li><a href="{% url 'application-sort' 'Technical Interview' %}">Technical Interview ({{ template_data.Technical_Interview }})</a>{% if '/sort/Technical' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
               <li><a href="{% url 'application-sort' 'Phone Screen' %}">Phone Screen ({{ template_data.Phone_Screen }})</a>{% if '/sort/Phone' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
               <li><a href="{% url 'application-sort' 'Application Submitted' %}">Application Submitted ({{ template_data.Application_Submitted }})</a>{% if '/sort/Application' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
-              <li><a href="{% url 'applications' %}">All ({{ template_data.All }})</a>{% if '/sort/' not in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
+              <li><a href="{% url 'applications' %}">All Active ({{ template_data.All }})</a>{% if '/sort/' not in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>
               <li><a href="{% url 'application-sort' 'Archived' %}">View Archive ({{ template_data.Archived }})</a>{% if '/sort/Archived' in request.path %}<span> <i class="icon-search"></i></span>{% endif %}</li>            
             </ul>
           </div>
@@ -79,9 +79,9 @@
                   <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#statusModal{{ application.id }}"><i class="icon-bg-dark icon-circled {{ application.icon }} icon-3x active"></i></a>
                 </div>
                 <ul class="post-meta">
-                  <li class="first"><i class="icon-calendar"></i><span>{{ application.date }}</span></li>
                   <li><i class="icon-list-alt"></i><span>{{ application.number_of_events }} Event(s)</span></li>
-                  <li class="last"><i class="icon-tags"></i><span></span></li>
+                  <li class="first"><i class="icon-calendar"></i><span>Last modified:</span></li>
+                  <li class="last"><span>{{ application.date }}</span></li>
                 </ul>
                 <div class="clear"></div>
               </div>
@@ -109,12 +109,22 @@
         {% else %}
 
         <div>
-          <h4>You haven't added any applications yet.</h4>
-          <p>Click <a href="{% url 'application-add' %}">here</a> to add an application.</p>
+          <h2>No applications.</h2>
+          <h5>Click <a href="{% url 'application-add' %}">here</a> to add an application.</h5>
         </div>
 
         {% endif %}
         <!-- end application -->
+
+      <div class="span7">
+        <aside>
+          <div class="widget">
+          <br><br>
+          <h3 class="text-center"><strong><a href="{% url 'application-add' %}"><i class="icon-circled icon-3x icon-plus"></i> Add Application</a></strong></h3>
+          </div>
+        </aside>
+      </div>
+
       </div>
     </div>
   </div>

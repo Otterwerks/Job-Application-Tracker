@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from pygal.style import DarkGreenBlueStyle
+from applications.charts import RecruitmentFunnel
 
 def register(request):
     if request.method == 'POST':
@@ -57,4 +59,33 @@ def logout(request):
     
 
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    app_chart = RecruitmentFunnel(
+        height=600,
+        width=1024,
+        explicit_size=True,
+        show_legend=False,
+        include_y_axis=False,
+        include_x_axis=False,
+        show_y_labels=False,
+        style=DarkGreenBlueStyle(label_font_size=14)
+    )
+
+    site_chart = RecruitmentFunnel(
+        height=600,
+        width=1024,
+        explicit_size=True,
+        show_legend=False,
+        include_y_axis=False,
+        include_x_axis=False,
+        show_y_labels=False,
+        style=DarkGreenBlueStyle(label_font_size=14)
+    )
+
+
+    
+    context = {
+        'app_chart': app_chart.generate(request.user),
+        'site_chart': site_chart.generate()
+    }
+
+    return render(request, 'accounts/dashboard.html', context)

@@ -5,6 +5,10 @@ Otter is a tool for job applicants to track the progress of their applications.
 
 Demo account: otterwerks/otterwerks
 
+<br>
+
+<img src="preview.jpg" width="600">
+
 ## Summary
 I wanted to build a project that would allow me to practice my development skills and also provide value once complete. This is a tool built with Django that gives users the ability to keep track of job applications and the status of those applications. Otter will render a visual Recruitment Funnel based on the stages of each application for the user as well as a chart showing the % stages of all applications across all users. I have created a public demo account to explore the project without having to register, use the link and credentials above.
 

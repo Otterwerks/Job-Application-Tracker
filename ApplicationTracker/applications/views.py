@@ -25,6 +25,7 @@ def get_form_data(post_request):
         try:
             if post_request.POST[field] != "":
                 form_data[field] = parse(post_request.POST[field])
+            else: form_data[field] = None
         except:
             return redirect('applications')
     return form_data

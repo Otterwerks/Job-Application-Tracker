@@ -33,11 +33,11 @@
             {% csrf_token %}
             <div class="row">
               <div class="span4 form-group">
-                <input type="text" class="form-control" id="position" name="position" placeholder="Position applied for" data-rule="minlen:6" data-msg="Please enter at least 6 char(s)" />
+                <input type="text" class="form-control" id="position" name="position" placeholder="Position applied for" data-rule="minlen:1" data-msg="Please enter at least 1 char" />
                 <div class="validation"></div>
               </div>
               <div class="span4 form-group">
-                <input type="text" class="form-control" id="company" name="company" placeholder="Company" data-rule="minlen:6" data-msg="Please enter at least 6 char(s)" />
+                <input type="text" class="form-control" id="company" name="company" placeholder="Company" data-rule="minlen:1" data-msg="Please enter at least 1 char" />
                 <div class="validation"></div>
               </div>
               <div class="span4 form-group">

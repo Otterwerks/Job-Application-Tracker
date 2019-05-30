@@ -43,7 +43,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
-            return redirect('applications')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid username or password')
             return redirect('login')

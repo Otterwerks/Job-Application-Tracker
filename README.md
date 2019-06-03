@@ -12,6 +12,12 @@ Demo account: otterwerks/otterwerks
 ## Summary
 I wanted to build a project that would allow me to practice my development skills and also provide value once complete. This is a tool built with Django that gives users the ability to keep track of job applications and the status of those applications. Otter will render a visual Recruitment Funnel based on the stages of each application for the user as well as a chart showing the % stages of all applications across all users. I have created a public demo account to explore the project without having to register, use the link and credentials above.
 
+## To-Do
+- File uploads: resume and cover letter need dynamic file paths so that each application can store a unique resume and cover letter
+- Text field: find a way to preserve formatting of text from copy/pasting job post into text field
+- Search: allow search field to match against position and company
+- Add feature descriptions
+
 ## Technical
 Otter was built with the Django framework and Postgres. There are three main database models: User, Application, and Event. They are organized simply through foreign keys in that Events belong to Applications which belong to Users - where User is from the built in Django Auth. The UI was adapted from a free boostrap template I found called <a href="https://bootstrapmade.com/plato-responsive-bootstrap-website-template/">Plato</a>.
 

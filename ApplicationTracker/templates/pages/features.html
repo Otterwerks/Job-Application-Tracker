@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Features{% endblock %}
+
+{% block content %}
+    
+<section id="subintro">
+  <div class="container">
+    <div class="row">
+      <div class="span4"></div>
+      <div class="span4">
+        <h3>what can Otter do for <strong>You</strong></h3>
+      </div>
+      <div class="span4"></div>
+    </div>
+  </div>
+</section>
+
+<section id="maincontent">
+  <div class="container">
+    <div class="row">
+      <img src="{% static 'media/otter.png' %}">
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -12,7 +12,7 @@ import datetime
 from dateutil.parser import parse
 
 def get_form_data(post_request):
-    application_fields = ['position', 'company', 'location', 'department', 'company_url', 'posting_url', 'portal_url', 'portal_login', 'portal_pass', 'resume', 'cover_letter', 'body']
+    application_fields = ['position', 'company', 'location', 'department', 'company_url', 'posting_url', 'portal_url', 'portal_login', 'portal_pass', 'body']
     date_fields = ['posted_on', 'closes_on', 'applied_on']
     form_data = {'user': post_request.user, 'last_updated': datetime.datetime.now()}
     for field in application_fields:

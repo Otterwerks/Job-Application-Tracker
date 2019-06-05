@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Visualization{% endblock %}
+
+{% block content %}
+    
+<section id="subintro">
+  <div class="container">
+    <div class="row">
+      <div class="span4"></div>
+      <div class="span4">
+        <h3>see your <strong>Progress</strong></h3>
+      </div>
+      <div class="span4"></div>
+    </div>
+  </div>
+</section>
+
+<section id="maincontent">
+  <div class="container">
+    <div class="row">
+      <img src="{% static 'media/otter.png' %}">
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 def get_upload_path(instance, filename):
-    return os.path.join("user_%d" % instance.owner.id, "company_%s" % instance.slug, filename)
+    return os.path.join("user_%d" % instance.owner.id, "application_%s" % instance.slug, filename)
 
 
 class Application(models.Model):

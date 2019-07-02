@@ -1,11 +1,13 @@
 from django.test import TestCase
+from django.urls import reverse
 from django.utils import timezone
-from Applications.models import Application
+from applications.models import Application
 
 class ApplicationTest(TestCase):
 
     def create_application( \
         self, \
+        user_id=1, \
         position='test position', \
         company='test company', \
         location='test location', \
@@ -23,6 +25,7 @@ class ApplicationTest(TestCase):
         is_stale=False, \
     ):
         return (Application.objects.create(
+            user_id=user_id,
             position=position,
             company=company,
             location=location,
@@ -48,4 +51,11 @@ class ApplicationTest(TestCase):
         a = self.create_application()
         self.assertTrue(isinstance(a, Application))
         self.assertEqual(a.__unicode__(), a.__str__())
+
+    def test_application_detail_view(self):
+        a = self.create_application()
+        res = self.client.get(reverse('detail'), {'application_id': 1})
+
+        self.assertEqual(res.status_code, 200)
+        self.assertIn(a.position, res.content)
 

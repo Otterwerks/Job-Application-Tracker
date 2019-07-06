@@ -54,8 +54,14 @@ class ApplicationTest(TestCase):
 
     def test_application_detail_view(self):
         a = self.create_application()
-        res = self.client.get(reverse('detail'), {'application_id': 1})
+        res = self.client.get(reverse('application-detail'), {'application_id': 1})
 
         self.assertEqual(res.status_code, 200)
         self.assertIn(a.position, res.content)
 
+    def test_application_index_view(self):
+        a = self.create_application()
+        res = self.client.get(reverse('application-list'))
+
+        self.assertEqual(res.status_code, 200)
+        self.assertIn(a.position, res.content)
